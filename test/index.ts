@@ -1,0 +1,6 @@
+import './chars.test'
+import './defaultValue.test'
+import './defined.test'
+import './items.test'
+import './keys.test'
+import './values.test'
