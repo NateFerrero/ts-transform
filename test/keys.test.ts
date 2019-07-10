@@ -12,17 +12,18 @@ const jackie: IPerson = {
   country: 'usa',
 }
 
-test('keys#toObject', expect => {
-  const result = keys(jackie).toObject<IPerson>((key, value) => ({
-    [key]: value.toUpperCase(),
+test('keys#to<object>', expect => {
+  const result = keys(jackie).to<IPerson>({}, (person, key) => ({
+    ...person,
+    [key]: key.toUpperCase(),
   }))
 
-  expect(result.name, 'JACKIE')
-  expect(result.country, 'USA')
+  expect(result.name, 'NAME')
+  expect(result.country, 'COUNTRY')
 })
 
 test('keys#toArray', expect => {
-  const result = keys(jackie).toArray(key => key.toUpperCase())
+  const result = keys(jackie).to([], (acc, key) => [...acc, key.toUpperCase()])
 
   items(['NAME', 'COUNTRY']).each((value, index) => {
     expect(result[index], value)
@@ -30,18 +31,18 @@ test('keys#toArray', expect => {
 })
 
 test('keys#toArray (use values)', expect => {
-  const result = keys(jackie).toArray((_key, value) => value)
+  const result = keys(jackie).to([], (acc, key) => [...acc, key])
 
-  items(['jackie', 'usa']).each((value, index) => {
+  items(['name', 'country']).each((value, index) => {
     expect(result[index], value)
   })
 })
 
-test('keys#toNumber', expect => {
+test('keys#to<string>', expect => {
   const result = keys({
     apples: 45,
     oranges: 55,
-  }).toNumber((_key, value) => value * 2)
+  }).to('', (acc, key) => (acc === '' ? key : `${acc}, ${key}`))
 
-  expect(result, 200)
+  expect(result, 'apples, oranges')
 })
