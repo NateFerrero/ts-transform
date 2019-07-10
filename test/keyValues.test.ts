@@ -1,4 +1,4 @@
-import { test } from './util'
+import { suite } from './util'
 
 import { keyValues, items } from '../src'
 
@@ -12,45 +12,50 @@ const jackie: IPerson = {
   country: 'usa',
 }
 
-test('keyValues#to<object>', expect => {
-  const result = keyValues(jackie).to<IPerson>({}, (person, [key, value]) => ({
-    ...person,
-    [key]: value.toUpperCase(),
-  }))
+suite('keyValues', test => {
+  test('#to<object>', expect => {
+    const result = keyValues(jackie).to<IPerson>(
+      {},
+      (person, [key, value]) => ({
+        ...person,
+        [key]: value.toUpperCase(),
+      }),
+    )
 
-  expect(result.name, 'JACKIE')
-  expect(result.country, 'USA')
-})
-
-test('keyValues#toArray', expect => {
-  const result = keyValues(jackie).to([], (acc, [key, country]) => [
-    ...acc,
-    key.toUpperCase(),
-  ])
-
-  items(['NAME', 'COUNTRY']).each((value, index) => {
-    expect(result[index], value)
+    expect(result.name, 'JACKIE')
+    expect(result.country, 'USA')
   })
-})
 
-test('keyValues#toArray (use values)', expect => {
-  const result = keyValues(jackie).to([], (acc, [key, value]) => [
-    ...acc,
-    value,
-  ])
+  test('#toArray', expect => {
+    const result = keyValues(jackie).to([], (acc, [key, country]) => [
+      ...acc,
+      key.toUpperCase(),
+    ])
 
-  items(['jackie', 'usa']).each((value, index) => {
-    expect(result[index], value)
+    items(['NAME', 'COUNTRY']).each((value, index) => {
+      expect(result[index], value)
+    })
   })
-})
 
-test('keyValues#to<string>', expect => {
-  const result = keyValues({
-    apples: 45,
-    oranges: 55,
-  }).to('', (acc, [key, value]) =>
-    acc === '' ? `${key}:${value}` : `${acc}, ${key}:${value}`,
-  )
+  test('#toArray (use values)', expect => {
+    const result = keyValues(jackie).to([], (acc, [key, value]) => [
+      ...acc,
+      value,
+    ])
 
-  expect(result, 'apples:45, oranges:55')
+    items(['jackie', 'usa']).each((value, index) => {
+      expect(result[index], value)
+    })
+  })
+
+  test('#to<string>', expect => {
+    const result = keyValues({
+      apples: 45,
+      oranges: 55,
+    }).to('', (acc, [key, value]) =>
+      acc === '' ? `${key}:${value}` : `${acc}, ${key}:${value}`,
+    )
+
+    expect(result, 'apples:45, oranges:55')
+  })
 })

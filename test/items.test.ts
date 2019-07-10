@@ -1,93 +1,100 @@
-import { test } from './util'
+import { suite } from './util'
 
-import { defaultValue, items } from '../src'
+import { items, defaultValue } from '../src'
+import { common } from './common'
 
-interface IPerson {
-  age: number
-  name: string
-  country: string
-}
+suite('items', test => {
+  interface IPerson {
+    age: number
+    name: string
+    country: string
+  }
 
-const jackie: IPerson = {
-  age: 22,
-  name: 'jackie',
-  country: 'usa',
-}
+  const jackie: IPerson = {
+    age: 22,
+    name: 'jackie',
+    country: 'usa',
+  }
 
-const marcy: IPerson = {
-  age: 28,
-  name: 'marcy',
-  country: 'canada',
-}
+  const marcy: IPerson = {
+    age: 28,
+    name: 'marcy',
+    country: 'canada',
+  }
 
-const people = [jackie, marcy, marcy]
+  const subject = items([jackie, marcy, marcy])
 
-test('items#to<array>', expect => {
-  const result = items(people).to([], (output, person) => [
-    ...output,
-    person.country,
-  ])
+  common(test, {
+    testArray(expect) {
+      const tenYearsLater = subject.array(person => ({
+        ...person,
+        age: person.age + 10,
+      }))
 
-  expect(result[0], jackie.country)
-  expect(result[1], marcy.country)
-})
+      items([32, 38, 38]).each((newAge, index) => {
+        expect(tenYearsLater[index].age, newAge)
+      })
+    },
 
-test('items#to<object> (transform)', expect => {
-  const result = items(people).to<{ [name: string]: string }>(
-    {},
-    (output, person) => ({
-      ...output,
-      [person.name]: person.country,
-    }),
-  )
+    testCount(expect) {
+      const howManyMarcy = subject.count(person => person.name === 'marcy')
 
-  expect(result.jackie, jackie.country)
-  expect(result.marcy, marcy.country)
-})
+      expect(howManyMarcy, 2)
+    },
 
-test('items#to<object> (counter)', expect => {
-  const result = items(people).to<{ [country: string]: number }>(
-    {},
-    (summary, person) => ({
-      ...summary,
-      [person.country]: defaultValue(summary[person.country], 0) + 1,
-    }),
-  )
+    testEach(expect) {},
 
-  expect(result.usa, 1)
-  expect(result.canada, 2)
-})
+    testObject(expect) {
+      const nameExists = subject.object(person => ({ [person.name]: true }))
 
-test('items#to<number>', expect => {
-  const result = items(people).to(0, count => count + 1)
+      expect(nameExists.marcy, true)
+      expect(nameExists.jackie, true)
+      expect(nameExists.phillip, undefined)
 
-  expect(result, 3)
-})
+      const nameCounts = subject.object<{ [key: string]: number }>(
+        (person, index, totals) => ({
+          [person.name]: defaultValue(totals[person.name], 0) + 1,
+        }),
+      )
 
-test('items#to<number> (use value)', expect => {
-  const result = items(people).to(0, (count, person) => count + person.age)
+      expect(nameCounts.marcy, 2)
+      expect(nameCounts.jackie, 1)
+      expect(nameCounts.phillip, undefined)
+    },
 
-  expect(result, 78)
-})
+    testSum(expect) {
+      const sumAges = subject.sum(person => person.age)
 
-test('items#sum', expect => {
-  const result = items(people).sum(person => person.age)
+      expect(sumAges, 78)
+    },
 
-  expect(result, 78)
-})
+    testToBoolean(expect) {
+      const allPeopleAreOver18 = subject.to(
+        true,
+        (value, person) => value && person.age >= 18,
+      )
+      const allPeopleAreOver25 = subject.to(
+        true,
+        (value, person) => value && person.age >= 25,
+      )
 
-test('items#count', expect => {
-  const result = items(people).count(person => person.age === 28)
+      expect(allPeopleAreOver18, true)
+      expect(allPeopleAreOver25, false)
+    },
 
-  expect(result, 2)
-})
+    testToNumber(expect) {
+      const howManyOverAge25 = subject.to(
+        0,
+        (count, person) => count + (person.age >= 25 ? 1 : 0),
+      )
 
-test('items#to<string>', expect => {
-  const result = items(people).to(
-    '',
-    (value, person) =>
-      `${value}${value.length ? ', ' : ''}${person.name.toUpperCase()}`,
-  )
+      expect(howManyOverAge25, 2)
+    },
 
-  expect(result, 'JACKIE, MARCY, MARCY')
+    testToString(expect) {
+      const glued = subject.to('', (value, person) => `${value}:${person.name}`)
+
+      expect(glued, ':jackie:marcy:marcy')
+    },
+  })
 })

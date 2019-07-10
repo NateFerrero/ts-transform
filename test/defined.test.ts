@@ -1,15 +1,17 @@
-import { test } from './util'
+import { suite } from './util'
 
 import { defined } from '../src'
 
-test('defined(defined)', expect => {
-  const result = defined(1)
+suite('defined', test => {
+  test('when defined', expect => {
+    const result = defined(1)
 
-  expect(result, true)
-})
+    expect(result, true)
+  })
 
-test('defined(undefined)', expect => {
-  const result = defined(undefined)
+  test('when undefined', expect => {
+    const result = defined(undefined)
 
-  expect(result, false)
+    expect(result, false)
+  })
 })

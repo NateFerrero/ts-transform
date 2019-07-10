@@ -1,17 +1,22 @@
-let suite = 0
+let suiteCounter = 0
 
-export const test = (
-  desc: string,
-  run: (expect: <T>(a: T, b: T) => void) => void,
-) => {
+export type Expect = <T>(a: T, b: T) => void
+
+export type Test = (desc: string, run: (expect: Expect) => void) => void
+
+export const test: Test = (desc: string, run: (expect: Expect) => void) => {
   const expect = <T>(a: T, b: T) => {
     if (a !== b) {
-      throw new Error(`[${suite}] Test ${desc} fail: ${a} !== ${b}`)
+      throw new Error(`[${suiteCounter}] Test ${desc} fail: ${a} !== ${b}`)
     }
   }
 
   run(expect)
 
-  console.log(`[${suite}] Test ${desc} pass!`)
-  suite++
+  console.log(`[${suiteCounter}] Test ${desc} pass!`)
+  suiteCounter++
+}
+
+export const suite = (name: string, tests: (test: Test) => void) => {
+  tests((desc, run) => test(`${name} ${desc}`, run))
 }
