@@ -1,7 +1,7 @@
 {
-  "name": "ts-nano",
+  "name": "ts-transform",
   "version": "0.0.0",
-  "description": "Utils for TypeScript",
+  "description": "TypeScript Data Transformation Utilities",
   "main": "dist/index.js",
   "dependencies": {},
   "devDependencies": {
@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NateFerrero/ts-nano.git"
+    "url": "git+https://github.com/simpletype/ts-transform.git"
   },
   "author": "Nate Ferrero",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NateFerrero/ts-nano/issues"
+    "url": "https://github.com/simpletype/ts-transform/issues"
   },
-  "homepage": "https://github.com/NateFerrero/ts-nano#readme"
+  "homepage": "https://github.com/simpletype/ts-transform#readme"
 }
