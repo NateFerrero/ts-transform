@@ -10,6 +10,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+    "start": "ts-node",
     "test": "ts-node spec/all.spec"
   },
   "repository": {
