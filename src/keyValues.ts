@@ -7,6 +7,6 @@ export const keyValues = <T extends object>(object: T) =>
   _transform<[keyof T, T[keyof T]]>(
     Object.keys(object).map<[keyof T, T[keyof T]]>(key => [
       key as keyof T,
-      object[key],
+      (object as { [key: string]: never })[key],
     ]),
   )

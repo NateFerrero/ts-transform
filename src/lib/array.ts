@@ -1,5 +1,5 @@
 import { To } from '../types/To'
 
-export const _array = <T>(to: To<T>) => <U>(
-  action: (value: T, index: number) => U,
-) => to<U[]>([], (result, value: T, index) => [...result, action(value, index)])
+export const _array = <T>(to: To<T>) => <TDestination>(
+  action: (value: T, index: number) => TDestination,
+) => to<TDestination[]>([], (result, value: T, index) => [...result, action(value, index)])

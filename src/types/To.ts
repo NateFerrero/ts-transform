@@ -1,4 +1,4 @@
-export type To<T> = <U>(
-  initialValue: U,
-  reducer: (result: U, item: T, index: number) => U,
-) => U
+export type To<T> = <TDestination>(
+  initialValue: TDestination,
+  reducer: (result: TDestination, item: T, index: number) => TDestination,
+) => TDestination

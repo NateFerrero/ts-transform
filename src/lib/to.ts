@@ -1,6 +1,9 @@
 import { To } from '../types/To'
 
-export const _to = <T>(array: T[]): To<T> => <V, W extends V>(
-  initialValue: V,
-  reducer: (result: V, value: T, index: number) => V,
-): W => array.reduce(reducer, initialValue) as W
+export const _to = <T>(array: T[]): To<T> => <
+  TIntermediate,
+  TDestination extends TIntermediate
+>(
+  initialValue: TIntermediate,
+  reducer: (result: TIntermediate, value: T, index: number) => TIntermediate,
+): TDestination => array.reduce(reducer, initialValue) as TDestination
