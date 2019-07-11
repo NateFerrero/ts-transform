@@ -1,0 +1,7 @@
+import './chars.spec'
+import './defaultValue.spec'
+import './defined.spec'
+import './items.spec'
+import './keys.spec'
+import './keyValues.spec'
+import './values.spec'

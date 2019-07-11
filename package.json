@@ -5,11 +5,12 @@
   "main": "dist/index.js",
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^12.6.2",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.3333"
   },
   "scripts": {
-    "test": "ts-node test"
+    "test": "ts-node spec/all.spec"
   },
   "repository": {
     "type": "git",

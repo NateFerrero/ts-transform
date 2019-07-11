@@ -1,4 +1,4 @@
-import { suite } from './util'
+import { suite } from './util/test'
 
 import { defined } from '../src'
 

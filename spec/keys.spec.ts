@@ -1,7 +1,7 @@
-import { suite } from './util'
-
-import { keys, defaultValue, items } from '../src'
-import { common } from './common'
+import { defaultValue, items, keys } from '../src'
+import { spy } from './util/spy'
+import { suite } from './util/test'
+import { testTransform } from './util/transform'
 
 suite('keys', test => {
   interface IPerson {
@@ -18,7 +18,7 @@ suite('keys', test => {
 
   const subject = keys(jackie)
 
-  common(test, {
+  testTransform(test, {
     testArray(expect) {
       const newKeys = subject.array(key => key.toUpperCase())
 
@@ -33,7 +33,17 @@ suite('keys', test => {
       expect(howManyAgeKeys, 1)
     },
 
-    testEach(expect) {},
+    testEach(expect) {
+      const [onEach, onEachCalls] = spy()
+
+      subject.each(onEach)
+
+      expect(onEachCalls.length, 3)
+
+      expect(onEachCalls[0][0], 'age')
+      expect(onEachCalls[1][0], 'name')
+      expect(onEachCalls[2][0], 'country')
+    },
 
     testObject(expect) {
       const keyExists = subject.object(key => ({ [key]: true }))

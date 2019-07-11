@@ -1,12 +1,12 @@
-import { suite } from './util'
-
-import { chars, items, defaultValue } from '../src'
-import { common } from './common'
+import { chars, defaultValue, items } from '../src'
+import { spy } from './util/spy'
+import { suite } from './util/test'
+import { testTransform } from './util/transform'
 
 suite('chars', test => {
   const subject = chars('canada')
 
-  common(test, {
+  testTransform(test, {
     testArray(expect) {
       const split = subject.array(char => char)
 
@@ -23,7 +23,19 @@ suite('chars', test => {
       expect(resultZ, 0)
     },
 
-    testEach(expect) {},
+    testEach(expect) {
+      const [onEach, onEachCalls] = spy()
+
+      subject.each(onEach)
+
+      expect(onEachCalls.length, 6)
+      expect(onEachCalls[0][0], 'c')
+      expect(onEachCalls[1][0], 'a')
+      expect(onEachCalls[2][0], 'n')
+      expect(onEachCalls[3][0], 'a')
+      expect(onEachCalls[4][0], 'd')
+      expect(onEachCalls[5][0], 'a')
+    },
 
     testObject(expect) {
       const letterExists = subject.object(char => ({ [char]: true }))
