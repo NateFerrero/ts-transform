@@ -6,7 +6,9 @@ TypeScript Data Transformation Utilities
 
 Run unit tests with `npm test`
 
-## `chars`
+## Documentation
+
+### `chars`
 
 ```typescript
 import { chars } from '@simpletype/ts-transform'
@@ -35,7 +37,7 @@ chars('12345').to<string>('go!', (message, char) => `${char} … ${message}`)
 // '5 … 4 … 3 … 2 … 1 … go!'
 ```
 
-## `defaultValue`
+### `defaultValue`
 
 ```typescript
 import { defaultValue } from '@simpletype/ts-transform'
@@ -47,7 +49,7 @@ defaultValue(undefined, 1)
 // 1
 ```
 
-## `defined`
+### `defined`
 
 ```typescript
 import { defined } from '@simpletype/ts-transform'
@@ -62,7 +64,7 @@ defined(undefined)
 // false
 ```
 
-## `items`
+### `items`
 
 ```typescript
 import { items } from '@simpletype/ts-transform'
@@ -91,7 +93,7 @@ items([1, 2, 3]).to<string>('go!', (message, x) => `${x} … ${message}`)
 // '3 … 2 … 1 … go!'
 ```
 
-## `keys`
+### `keys`
 
 All operations available on `items()` above are also available on `keys()`, but for brevity only one example is shown.
 
@@ -105,7 +107,7 @@ keys({ a: 1, b: 2, c: 3 }).to<string>(
 // 'a, b, c'
 ```
 
-## `keyValues`
+### `keyValues`
 
 All operations available on `items()` above are also available on `keyValues()`, but for brevity only one example is shown.
 
@@ -120,7 +122,7 @@ keyValues({ a: 1, b: 2, c: 3 }).to<string>(
 // 'a=1, b=2, c=3'
 ```
 
-## `values`
+### `values`
 
 All operations available on `items()` above are also available on `values()`, but for brevity only one example is shown.
 

@@ -1,17 +1,19 @@
 {
   "name": "@simpletype/ts-transform",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "TypeScript Data Transformation Utilities",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^12.6.2",
-    "ts-node": "^8.0.3",
-    "typescript": "^3.3.3333"
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "start": "ts-node",
-    "test": "ts-node spec/all.spec"
+    "test": "ts-node spec/all.spec",
+    "prepublishOnly": "tsc -p ./src --outDir dist"
   },
   "repository": {
     "type": "git",
