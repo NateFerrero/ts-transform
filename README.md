@@ -9,7 +9,7 @@ Run unit tests with `npm test`
 ## `chars`
 
 ```typescript
-import { chars } from 'ts-transform'
+import { chars } from '@simpletype/ts-transform'
 
 chars('canada').array(char => char.charCodeAt(0))
 // [ 99, 97, 110, 97, 100, 97 ]
@@ -38,7 +38,7 @@ chars('12345').to<string>('go!', (message, char) => `${char} … ${message}`)
 ## `defaultValue`
 
 ```typescript
-import { defaultValue } from 'ts-transform'
+import { defaultValue } from '@simpletype/ts-transform'
 
 defaultValue(0, 1)
 // 0
@@ -50,7 +50,7 @@ defaultValue(undefined, 1)
 ## `defined`
 
 ```typescript
-import { defined } from 'ts-transform'
+import { defined } from '@simpletype/ts-transform'
 
 defined(0)
 // true
@@ -65,7 +65,7 @@ defined(undefined)
 ## `items`
 
 ```typescript
-import { items } from 'ts-transform'
+import { items } from '@simpletype/ts-transform'
 
 items([1, 2, 3]).array(x => x * 10)
 // [ 10, 20, 30 ]
@@ -96,7 +96,7 @@ items([1, 2, 3]).to<string>('go!', (message, x) => `${x} … ${message}`)
 All operations available on `items()` above are also available on `keys()`, but for brevity only one example is shown.
 
 ```typescript
-import { keys } from 'ts-transform'
+import { keys } from '@simpletype/ts-transform'
 
 keys({ a: 1, b: 2, c: 3 }).to<string>(
   '',
@@ -110,7 +110,7 @@ keys({ a: 1, b: 2, c: 3 }).to<string>(
 All operations available on `items()` above are also available on `keyValues()`, but for brevity only one example is shown.
 
 ```typescript
-import { keyValues } from 'ts-transform'
+import { keyValues } from '@simpletype/ts-transform'
 
 keyValues({ a: 1, b: 2, c: 3 }).to<string>(
   '',
@@ -125,7 +125,7 @@ keyValues({ a: 1, b: 2, c: 3 }).to<string>(
 All operations available on `items()` above are also available on `values()`, but for brevity only one example is shown.
 
 ```typescript
-import { values } from 'ts-transform'
+import { values } from '@simpletype/ts-transform'
 
 values({ a: 1, b: 2, c: 3 }).to<string>(
   '',
