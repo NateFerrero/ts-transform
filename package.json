@@ -1,5 +1,5 @@
 {
-  "name": "ts-transform",
+  "name": "@simpletype/ts-transform",
   "version": "0.0.0",
   "description": "TypeScript Data Transformation Utilities",
   "main": "dist/index.js",
