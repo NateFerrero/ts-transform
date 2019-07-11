@@ -1,1 +1,7 @@
-{}
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "strict": true,
+    "declaration": true
+  }
+}
