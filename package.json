@@ -1,6 +1,6 @@
 {
   "name": "@simpletype/ts-transform",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript Data Transformation Utilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

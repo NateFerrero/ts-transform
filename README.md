@@ -2,9 +2,15 @@
 
 TypeScript Data Transformation Utilities
 
+## Installing
+
+Install with npm: `npm i @simpletype/ts-transform`
+
 ## Development
 
 Run unit tests with `npm test`
+
+Verify build with `npm run prepublishOnly`
 
 ## Documentation
 
