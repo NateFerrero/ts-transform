@@ -129,7 +129,7 @@ import { values } from 'ts-transform'
 
 values({ a: 1, b: 2, c: 3 }).to<string>(
   '',
-  (message, key) => `${message}${message === '' ? '' : ', '}${key}`,
+  (message, value) => `${message}${message === '' ? '' : ', '}${value}`,
 )
 // '1, 2, 3'
 ```
